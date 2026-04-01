@@ -57,6 +57,7 @@ function App() {
             <a href="#systems">Systems</a>
             <a href="#about">About</a>
             <a href="#contact" className="nav-cta">Contact</a>
+            <a href="/it" className="btn-secondary">IT</a>
           </nav>
         </div>
       </header>
