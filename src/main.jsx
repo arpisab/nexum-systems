@@ -4,9 +4,8 @@ import App from './App.jsx'
 import AppIT from './AppIT.jsx'
 import './styles/global.css'
 
-const path = window.location.pathname
-
-const isItalian = path.startsWith('/it')
+const params = new URLSearchParams(window.location.search)
+const isItalian = params.get('lang') === 'it'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

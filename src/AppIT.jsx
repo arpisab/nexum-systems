@@ -16,9 +16,7 @@ export default function AppIT() {
             <a href="#contact" className="btn-primary">
               Inizia un progetto
             </a>
-            <a href="/" className="btn-secondary">
-              English
-            </a>
+            <a href="?" className="btn-secondary">English</a>
           </div>
         </section>
   
