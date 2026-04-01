@@ -1,50 +1,17 @@
 import { useMemo } from 'react'
-
-const capabilities = [
-  {
-    title: 'Digital Architecture',
-    text: 'Web platforms, service websites, content structures and scalable digital frameworks designed for clarity and long-term use.',
-  },
-  {
-    title: 'Operational Systems',
-    text: 'Process mapping, structured workflows, information environments and operational logic for organizations working across borders.',
-  },
-  {
-    title: 'Interface & Experience',
-    text: 'User-focused dashboards, enterprise UX and clear interaction layers that make complex systems easier to understand and use.',
-  },
-]
-
-const intelligent = [
-  'Automated workflows',
-  'Structured data environments',
-  'Smart reporting layers',
-  'Assistive interfaces',
-]
-
-const approach = [
-  {
-    title: 'Structured',
-    text: 'No noise, no ornamental complexity. Every page and system component is built with purpose.',
-  },
-  {
-    title: 'Scalable',
-    text: 'Designed to evolve from a lean first release into a broader operational platform.',
-  },
-  {
-    title: 'Precise',
-    text: 'Clear information hierarchies and disciplined execution aligned with international business needs.',
-  },
-]
+import { content } from './content'
 
 function App() {
   const year = useMemo(() => new Date().getFullYear(), [])
+  const params = new URLSearchParams(window.location.search)
+  const lang = params.get('lang') === 'it' ? 'it' : 'en'
+  const t = content[lang]
 
   return (
     <div className="site-shell">
       <header className="site-header">
         <div className="container header-inner">
-          <a className="brand" href="#top" aria-label="Nexum Systems home">
+          <a className="brand" href="#top">
             <span className="brand-mark">N</span>
             <span className="brand-text">
               <strong>NEXUM</strong>
@@ -52,12 +19,14 @@ function App() {
             </span>
           </a>
 
-          <nav className="site-nav" aria-label="Primary navigation">
-            <a href="#services">Services</a>
-            <a href="#systems">Systems</a>
-            <a href="#about">About</a>
-            <a href="#contact" className="nav-cta">Contact</a>
-            <a href="?lang=it" className="btn-secondary">IT</a>
+          <nav className="site-nav">
+            <a href="#services">{t.nav.services}</a>
+            <a href="#systems">{t.nav.systems}</a>
+            <a href="#about">{t.nav.about}</a>
+            <a href="#contact" className="nav-cta">{t.nav.contact}</a>
+            <a href={lang === 'it' ? '?' : '?lang=it'} className="lang-switch">
+              {lang === 'it' ? 'EN' : 'IT'}
+            </a>
           </nav>
         </div>
       </header>
@@ -67,34 +36,29 @@ function App() {
           <div className="container hero-grid">
             <div className="hero-copy">
               <p className="eyebrow">Digital Infrastructure for Global Business</p>
-              <h1>
-                We design systems that connect digital, operational and
-                organizational layers.
-              </h1>
-              <p className="hero-text">
-                Nexum Systems supports companies working across countries with a
-                structured digital layer: websites, interfaces, workflows and
-                intelligent environments built for clarity, precision and scale.
-              </p>
+              <h1>{t.hero.title}</h1>
+              <p className="hero-text">{t.hero.text}</p>
+
               <div className="hero-actions">
                 <a className="button button-primary" href="#contact">
-                  Start a Project
+                  {t.hero.ctaPrimary}
                 </a>
                 <a className="button button-secondary" href="#about">
-                  Discover the Model
+                  {t.hero.ctaSecondary}
                 </a>
               </div>
             </div>
 
-            <div className="hero-panel" aria-hidden="true">
+            <aside className="hero-panel" aria-hidden="true">
               <div className="panel-card panel-card-main">
                 <span className="panel-label">Core Model</span>
                 <h2>Infrastructure, not marketing.</h2>
                 <p>
-                  A surface-level independent brand layer with the discipline of
-                  a deeper operational backbone.
+                  A focused, contemporary digital layer built to sit on top of a
+                  deeper operational backbone.
                 </p>
               </div>
+
               <div className="panel-grid">
                 <div className="panel-card small">
                   <span className="panel-label">Layer 01</span>
@@ -102,32 +66,32 @@ function App() {
                 </div>
                 <div className="panel-card small">
                   <span className="panel-label">Layer 02</span>
-                  <p>Operational logic</p>
+                  <p>Operational systems</p>
                 </div>
                 <div className="panel-card small">
                   <span className="panel-label">Layer 03</span>
-                  <p>Intelligent systems</p>
+                  <p>Intelligent interfaces</p>
                 </div>
                 <div className="panel-card small">
                   <span className="panel-label">Layer 04</span>
                   <p>Global integration</p>
                 </div>
               </div>
-            </div>
+            </aside>
           </div>
         </section>
 
         <section className="section section-dark">
           <div className="container metrics-grid">
-            <div>
+            <div className="metric-card">
               <span className="metric-value">01</span>
               <p>Independent-facing brand layer</p>
             </div>
-            <div>
+            <div className="metric-card">
               <span className="metric-value">02</span>
               <p>Legally and fiscally linked operational model</p>
             </div>
-            <div>
+            <div className="metric-card">
               <span className="metric-value">03</span>
               <p>Scalable from website to systems and AI-assisted interfaces</p>
             </div>
@@ -142,7 +106,7 @@ function App() {
             </div>
 
             <div className="card-grid">
-              {capabilities.map((item) => (
+              {t.capabilities.map((item) => (
                 <article className="card" key={item.title}>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
@@ -156,16 +120,13 @@ function App() {
           <div className="container split-grid">
             <div>
               <p className="eyebrow">Intelligent Systems</p>
-              <h2>Soft AI integration, framed as operational evolution.</h2>
-              <p>
-                Nexum Systems introduces automation, structured data and adaptive
-                interfaces as a practical extension of business infrastructure —
-                not as hype, but as a tool for better clarity and efficiency.
-              </p>
+              <h2>{t.intelligent.title}</h2>
+              <p>{t.intelligent.text}</p>
             </div>
+
             <div className="list-panel">
               <ul>
-                {intelligent.map((item) => (
+                {t.intelligent.list.map((item) => (
                   <li key={item}>{item}</li>
                 ))}
               </ul>
@@ -173,28 +134,7 @@ function App() {
           </div>
         </section>
 
-        <section className="section">
-          <div className="container split-grid">
-            <div>
-              <p className="eyebrow">Global Integration</p>
-              <h2>Built to sit on top of a broader operational ecosystem.</h2>
-            </div>
-            <div>
-              <p>
-                Nexum Systems appears as a focused and contemporary digital
-                entity, while remaining connected to a deeper infrastructure for
-                international operations, organizational processes and long-term
-                business support.
-              </p>
-              <p>
-                This model keeps the offer agile in the market and solid in its
-                structure.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <section id="about" className="section section-alt">
+        <section id="about" className="section">
           <div className="container split-grid">
             <div>
               <p className="eyebrow">About</p>
@@ -202,7 +142,7 @@ function App() {
             </div>
             <div>
               <p>
-                Nexum Systems is a digital infrastructure initiative created for
+                Nexum Systems is a digital infrastructure initiative designed for
                 companies that need more than communication: they need structure,
                 clarity and a digital layer capable of supporting growth.
               </p>
@@ -215,14 +155,15 @@ function App() {
           </div>
         </section>
 
-        <section className="section">
+        <section className="section section-alt">
           <div className="container">
             <div className="section-heading">
               <p className="eyebrow">Approach</p>
               <h2>Three principles define the brand.</h2>
             </div>
+
             <div className="card-grid">
-              {approach.map((item) => (
+              {t.approach.map((item) => (
                 <article className="card" key={item.title}>
                   <h3>{item.title}</h3>
                   <p>{item.text}</p>
@@ -243,6 +184,7 @@ function App() {
                 stage of development.
               </p>
             </div>
+
             <div className="contact-actions">
               <a className="button button-primary" href="mailto:hello@nexumsystems.com">
                 hello@nexumsystems.com
@@ -258,7 +200,7 @@ function App() {
       <footer className="site-footer">
         <div className="container footer-inner">
           <p>© {year} Nexum Systems</p>
-          <p>Digital Infrastructure for Global Business</p>
+          <p>{t.footer.tagline}</p>
         </div>
       </footer>
     </div>
